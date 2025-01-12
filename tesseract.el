@@ -45,6 +45,11 @@
 :group 'tesseract
 :type 'string)
 
+(defcustom tesseract/psm "single_block"
+  "Page segmentation modes (PSM)"
+  :group 'tesseract
+  :type 'string)
+
 ;; functions
 
 (defconst tesseract-installed-p (if (executable-find "tesseract") t nil)
@@ -87,6 +92,7 @@
 		     nil
 		     t
 		     t
+		     "--psm" tesseract/psm
 		     current-image
 		     "-"
 		     "-l" tesseract-language))))
@@ -122,6 +128,7 @@
 		     nil
 		     t
 		     t
+		     "--psm" tesseract/psm
 		     temp-image
 		     "-"
 		     "-l" tesseract-language))))
@@ -142,6 +149,7 @@
 			     nil
 			     t
 			     t
+			     "--psm" tesseract/psm
 			     (concat cache-dir current-image)
 			     "-"
 			     "-l" tesseract-language)))))
@@ -157,6 +165,7 @@
 		     nil
 		     nil
 		     t
+		     "--psm" tesseract/psm
 		     current-image
 		     (car (split-string current-image "\\.[[:alpha:]]+$" t))
 		     "-l" tesseract-language
@@ -185,6 +194,7 @@
 			   nil
 			   t
 			   nil
+			   "--psm" tesseract/psm
 			   current-image
 			   "-"
 			   "-l" tesseract-language
@@ -206,6 +216,7 @@
 			   nil
 			   "*tesseract-output*"
 			   nil
+			   "--psm" tesseract/psm
 			   input
 			   tmp-pdf-base 
 			   "-l" tesseract-language
